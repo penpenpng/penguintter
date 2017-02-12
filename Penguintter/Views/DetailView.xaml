@@ -1,0 +1,137 @@
+﻿<Window x:Class="Penguintter.Views.DetailView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:local="clr-namespace:Penguintter.Views"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        Title="DetailView"
+        Width="500"
+        Height="270"
+        AllowsTransparency="True"
+        ShowInTaskbar="False"
+        Topmost="True"
+        WindowStyle="None"
+        mc:Ignorable="d">
+    <Window.Background>
+        <SolidColorBrush Color="{Binding Config.DetailBackground.Color}" />
+    </Window.Background>
+    <Window.Resources>
+        <local:CreatedAtConverter x:Key="CreatedAtConverter" />
+    </Window.Resources>
+    <DockPanel Margin="5">
+        <Border BorderBrush="Gray"
+                BorderThickness="0.5"
+                CornerRadius="10"
+                DockPanel.Dock="Top">
+            <DockPanel>
+                <Border Width="50"
+                        Height="50"
+                        CornerRadius="10"
+                        DockPanel.Dock="Left">
+                    <Border.Background>
+                        <ImageBrush ImageSource="{Binding Icon}" Stretch="None" />
+                    </Border.Background>
+                </Border>
+                <TextBlock Margin="10,0,0,0"
+                           DockPanel.Dock="Top"
+                           FontSize="22"
+                           Text="{Binding Status.User.Name}" />
+                <TextBlock Margin="10,0,0,0"
+                           DockPanel.Dock="Left"
+                           FontSize="14"
+                           Foreground="#202020"
+                           Text="{Binding Status.User.ScreenName,
+                                          StringFormat={}@{0}}" />
+                <TextBlock Margin="0,0,10,0"
+                           DockPanel.Dock="Right"
+                           FontSize="14"
+                           Foreground="#202020"
+                           Text="{Binding Status.CreatedAt,
+                                          Converter={StaticResource CreatedAtConverter}}"
+                           TextAlignment="Right" />
+            </DockPanel>
+        </Border>
+        <StackPanel Height="30"
+                    HorizontalAlignment="Center"
+                    DockPanel.Dock="Bottom"
+                    Orientation="Horizontal">
+            <Button Width="100" Margin="5,0" Content="Close" Click="Close_Click">
+                <Button.Background>
+                    <SolidColorBrush Color="{Binding Config.DetailBackground.Color}" />
+                </Button.Background>
+            </Button>
+            <Button Command="{Binding Command}" x:Name="ReplyButton">
+                <Button.Style>
+                    <Style TargetType="{x:Type Button}">
+                        <Style.Setters>
+                            <Setter Property="Content" Value="Reply" />
+                            <Setter Property="Width" Value="100" />
+                            <Setter Property="Margin" Value="5,0" />
+                            <Setter Property="Background">
+                                <Setter.Value>
+                                    <SolidColorBrush Color="{Binding Config.DetailBackground.Color}" />
+                                </Setter.Value>
+                            </Setter>
+                        </Style.Setters>
+                    </Style>
+                </Button.Style>
+            </Button>
+            <Button Command="{Binding Command}" x:Name="RetweetButton">
+                <Button.Style>
+                    <Style TargetType="{x:Type Button}">
+                        <Style.Setters>
+                            <Setter Property="Content" Value="Retweet" />
+                            <Setter Property="Width" Value="100" />
+                            <Setter Property="Margin" Value="5,0" />
+                            <Setter Property="Background">
+                                <Setter.Value>
+                                    <SolidColorBrush Color="{Binding Config.DetailBackground.Color}" />
+                                </Setter.Value>
+                            </Setter>
+                        </Style.Setters>
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding Command.IsPushed}" Value="True">
+                                <Setter Property="FontWeight" Value="Bold" />
+                                <Setter Property="BorderThickness" Value="1" />
+                                <Setter Property="Content" Value="Un-retweet" />
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </Button.Style>
+            </Button>
+            <Button Command="{Binding Command}" x:Name="FavoriteButton">
+                <Button.Style>
+                    <Style TargetType="{x:Type Button}">
+                        <Style.Setters>
+                            <Setter Property="Content" Value="Favorite" />
+                            <Setter Property="Width" Value="100" />
+                            <Setter Property="Margin" Value="5,0" />
+                            <Setter Property="Background">
+                                <Setter.Value>
+                                    <SolidColorBrush Color="{Binding Config.DetailBackground.Color}" />
+                                </Setter.Value>
+                            </Setter>
+                        </Style.Setters>
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding Command.IsPushed, Mode=OneWay}" Value="True">
+                                <Setter Property="FontWeight" Value="Bold" />
+                                <Setter Property="BorderThickness" Value="1" />
+                                <Setter Property="Content" Value="Un-favorite" />
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </Button.Style>
+            </Button>
+        </StackPanel>
+        <Border Margin="0,5"
+                BorderBrush="Gray"
+                BorderThickness="0.5">
+            <ScrollViewer MinHeight="150" VerticalScrollBarVisibility="Auto">
+                <TextBlock Margin="5,0"
+                           FontSize="16"
+                           Text="{Binding Status.Text}"
+                           TextWrapping="Wrap" />
+            </ScrollViewer>
+        </Border>
+    </DockPanel>
+</Window>

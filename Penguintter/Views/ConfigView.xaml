@@ -1,0 +1,226 @@
+﻿<Window x:Class="Penguintter.Views.ConfigView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:local="clr-namespace:Penguintter.Views"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        Title="設定"
+        SizeToContent="WidthAndHeight"
+        mc:Ignorable="d">
+    <Window.Resources>
+        <Style x:Key="label" TargetType="TextBlock">
+            <Setter Property="Width" Value="150" />
+            <Setter Property="Margin" Value="10,0,0,0" />
+        </Style>
+        <Style x:Key="notice" TargetType="TextBlock">
+            <Setter Property="FontSize" Value="11" />
+            <Setter Property="Foreground" Value="Gray" />
+            <Setter Property="Margin" Value="10,0" />
+        </Style>
+        <Style x:Key="h1" TargetType="TextBlock">
+            <Setter Property="Margin" Value="0,3,0,5" />
+            <Setter Property="FontSize" Value="13" />
+            <Setter Property="FontWeight" Value="Bold" />
+        </Style>
+        <Style TargetType="TextBox">
+            <Setter Property="Width" Value="35" />
+        </Style>
+        <Style TargetType="Button">
+            <Setter Property="Margin" Value="5,0" />
+            <Setter Property="Width" Value="90" />
+            <Setter Property="Height" Value="25" />
+        </Style>
+    </Window.Resources>
+    <StackPanel Margin="5">
+        <TextBlock Style="{StaticResource h1}" Text="コメント表示の設定" />
+        <StackPanel Orientation="Horizontal">
+            <TextBlock Style="{StaticResource label}" Text="表示時間" />
+            <TextBox Text="{Binding Config.StatusLifeTime.Value, UpdateSourceTrigger=Explicit, ValidatesOnExceptions=True}" />
+            <TextBlock Text=" sec" />
+            <TextBlock Style="{StaticResource notice}" Text="(1~60の整数値)" />
+        </StackPanel>
+        <StackPanel Orientation="Horizontal">
+            <TextBlock Style="{StaticResource label}" Text="複数行表示を許す" />
+            <CheckBox IsChecked="{Binding Config.AllowMultiLines, UpdateSourceTrigger=Explicit, ValidatesOnExceptions=True}" />
+        </StackPanel>
+        <StackPanel Orientation="Horizontal">
+            <TextBlock Text="幅が " Margin="10,0,0,0" />
+            <TextBox Text="{Binding Config.StatusDisplyType_WidthLimit.Value, UpdateSourceTrigger=Explicit, ValidatesOnExceptions=True}"
+                     Margin="0"/>
+            <TextBlock Width="Auto"
+                       Text=" pxを越える場合" />
+        </StackPanel>
+        <StackPanel>
+            <RadioButton Content="すべて表示する" IsChecked="{Binding Config.StatusDisplyType_ShowAll, UpdateSourceTrigger=Explicit, ValidatesOnExceptions=True}" Margin="30,0,0,0"/>
+            <RadioButton Content="折り返して表示する" IsChecked="{Binding Config.StatusDisplyType_Wrap, UpdateSourceTrigger=Explicit, ValidatesOnExceptions=True}" Margin="30,0,0,0"/>
+            <RadioButton Content="幅を超えた分は省略する" IsChecked="{Binding Config.StatusDisplyType_Hide, UpdateSourceTrigger=Explicit, ValidatesOnExceptions=True}" Margin="30,0,0,0"/>
+        </StackPanel>
+        <StackPanel Orientation="Horizontal">
+            <TextBlock Width="Auto"
+                       Style="{StaticResource label}"
+                       Text="文字サイズ" />
+            <TextBlock Style="{StaticResource notice}" Text="(1~50の整数値)" />
+        </StackPanel>
+        <StackPanel Orientation="Horizontal">
+            <TextBlock Padding="20,0,0,0"
+                       Style="{StaticResource label}"
+                       Text="スクリーンネーム(@id)" />
+            <TextBox Text="{Binding Config.ScreenNameFontSize.Value, UpdateSourceTrigger=Explicit, ValidatesOnExceptions=True}" />
+            <TextBlock Text=" px" />
+        </StackPanel>
+        <StackPanel Orientation="Horizontal">
+            <TextBlock Padding="20,0,0,0"
+                       Style="{StaticResource label}"
+                       Text="ツイート本文" />
+            <TextBox Text="{Binding Config.StatusFontSize.Value, UpdateSourceTrigger=Explicit, ValidatesOnExceptions=True}" />
+            <TextBlock Text=" px" />
+        </StackPanel>
+        <StackPanel Orientation="Horizontal">
+            <TextBlock Width="Auto"
+                       Style="{StaticResource label}"
+                       Text="文字色" />
+            <TextBlock Style="{StaticResource notice}" Text="(0~255の整数値)" />
+        </StackPanel>
+        <StackPanel Orientation="Horizontal">
+            <TextBlock Padding="20,0,0,0"
+                       Style="{StaticResource label}"
+                       Text="通常ツイート" />
+            <TextBlock Text="R: " />
+            <TextBox Margin="0,0,5,0" Text="{Binding Config.NormalColor.R, UpdateSourceTrigger=Explicit, ValidatesOnExceptions=True}" />
+            <TextBlock Text="G: " />
+            <TextBox Margin="0,0,5,0" Text="{Binding Config.NormalColor.G, UpdateSourceTrigger=Explicit, ValidatesOnExceptions=True}" />
+            <TextBlock Text="B: " />
+            <TextBox Margin="0,0,5,0" Text="{Binding Config.NormalColor.B, UpdateSourceTrigger=Explicit, ValidatesOnExceptions=True}" />
+            <TextBlock Text="A: " />
+            <TextBox Text="{Binding Config.NormalColor.A, UpdateSourceTrigger=Explicit, ValidatesOnExceptions=True}" />
+        </StackPanel>
+        <StackPanel Orientation="Horizontal">
+            <TextBlock Padding="20,0,0,0"
+                       Style="{StaticResource label}"
+                       Text="リツイート" />
+            <TextBlock Text="R: " />
+            <TextBox Margin="0,0,5,0" Text="{Binding Config.RetweetColor.R, UpdateSourceTrigger=Explicit, ValidatesOnExceptions=True}" />
+            <TextBlock Text="G: " />
+            <TextBox Margin="0,0,5,0" Text="{Binding Config.RetweetColor.G, UpdateSourceTrigger=Explicit, ValidatesOnExceptions=True}" />
+            <TextBlock Text="B: " />
+            <TextBox Margin="0,0,5,0" Text="{Binding Config.RetweetColor.B, UpdateSourceTrigger=Explicit, ValidatesOnExceptions=True}" />
+            <TextBlock Text="A: " />
+            <TextBox Text="{Binding Config.RetweetColor.A, UpdateSourceTrigger=Explicit, ValidatesOnExceptions=True}" />
+        </StackPanel>
+        <StackPanel Orientation="Horizontal">
+            <TextBlock Padding="20,0,0,0"
+                       Style="{StaticResource label}"
+                       Text="自分へのリプライ" />
+            <TextBlock Text="R: " />
+            <TextBox Margin="0,0,5,0" Text="{Binding Config.ReplyColor.R, UpdateSourceTrigger=Explicit, ValidatesOnExceptions=True}" />
+            <TextBlock Text="G: " />
+            <TextBox Margin="0,0,5,0" Text="{Binding Config.ReplyColor.G, UpdateSourceTrigger=Explicit, ValidatesOnExceptions=True}" />
+            <TextBlock Text="B: " />
+            <TextBox Margin="0,0,5,0" Text="{Binding Config.ReplyColor.B, UpdateSourceTrigger=Explicit, ValidatesOnExceptions=True}" />
+            <TextBlock Text="A: " />
+            <TextBox Text="{Binding Config.ReplyColor.A, UpdateSourceTrigger=Explicit, ValidatesOnExceptions=True}" />
+        </StackPanel>
+        <StackPanel Orientation="Horizontal">
+            <TextBlock Width="Auto"
+                       Style="{StaticResource label}"
+                       Text="背景色" />
+            <TextBlock Style="{StaticResource notice}" Text="(0~255の整数値)" />
+        </StackPanel>
+        <StackPanel Orientation="Horizontal">
+            <TextBlock Padding="20,0,0,0"
+                       Style="{StaticResource label}"
+                       Text="通常ツイート" />
+            <TextBlock Text="R: " />
+            <TextBox Margin="0,0,5,0" Text="{Binding Config.NormalBackground.R, UpdateSourceTrigger=Explicit, ValidatesOnExceptions=True}" />
+            <TextBlock Text="G: " />
+            <TextBox Margin="0,0,5,0" Text="{Binding Config.NormalBackground.G, UpdateSourceTrigger=Explicit, ValidatesOnExceptions=True}" />
+            <TextBlock Text="B: " />
+            <TextBox Margin="0,0,5,0" Text="{Binding Config.NormalBackground.B, UpdateSourceTrigger=Explicit, ValidatesOnExceptions=True}" />
+            <TextBlock Text="A: " />
+            <TextBox Text="{Binding Config.NormalBackground.A, UpdateSourceTrigger=Explicit, ValidatesOnExceptions=True}" />
+        </StackPanel>
+        <StackPanel Orientation="Horizontal">
+            <TextBlock Padding="20,0,0,0"
+                       Style="{StaticResource label}"
+                       Text="リツイート" />
+            <TextBlock Text="R: " />
+            <TextBox Margin="0,0,5,0" Text="{Binding Config.RetweetBackground.R, UpdateSourceTrigger=Explicit, ValidatesOnExceptions=True}" />
+            <TextBlock Text="G: " />
+            <TextBox Margin="0,0,5,0" Text="{Binding Config.RetweetBackground.G, UpdateSourceTrigger=Explicit, ValidatesOnExceptions=True}" />
+            <TextBlock Text="B: " />
+            <TextBox Margin="0,0,5,0" Text="{Binding Config.RetweetBackground.B, UpdateSourceTrigger=Explicit, ValidatesOnExceptions=True}" />
+            <TextBlock Text="A: " />
+            <TextBox Text="{Binding Config.RetweetBackground.A, UpdateSourceTrigger=Explicit, ValidatesOnExceptions=True}" />
+        </StackPanel>
+        <StackPanel Orientation="Horizontal">
+            <TextBlock Padding="20,0,0,0"
+                       Style="{StaticResource label}"
+                       Text="自分へのリプライ" />
+            <TextBlock Text="R: " />
+            <TextBox Margin="0,0,5,0" Text="{Binding Config.ReplyBackground.R, UpdateSourceTrigger=Explicit, ValidatesOnExceptions=True}" />
+            <TextBlock Text="G: " />
+            <TextBox Margin="0,0,5,0" Text="{Binding Config.ReplyBackground.G, UpdateSourceTrigger=Explicit, ValidatesOnExceptions=True}" />
+            <TextBlock Text="B: " />
+            <TextBox Margin="0,0,5,0" Text="{Binding Config.ReplyBackground.B, UpdateSourceTrigger=Explicit, ValidatesOnExceptions=True}" />
+            <TextBlock Text="A: " />
+            <TextBox Text="{Binding Config.ReplyBackground.A, UpdateSourceTrigger=Explicit, ValidatesOnExceptions=True}" />
+        </StackPanel>
+        <TextBlock Style="{StaticResource h1}" Text="詳細ウィンドウの設定" />
+        <StackPanel Orientation="Horizontal">
+            <TextBlock Style="{StaticResource label}" Text="表示しない" />
+            <CheckBox IsChecked="{Binding Config.NotShowDetailView, UpdateSourceTrigger=Explicit, ValidatesOnExceptions=True}" />
+        </StackPanel>
+        <StackPanel Orientation="Horizontal">
+            <TextBlock Style="{StaticResource label}" Text="表示時間" />
+            <TextBox Text="{Binding Config.DetailLifeTime.Value, UpdateSourceTrigger=Explicit, ValidatesOnExceptions=True}" />
+            <TextBlock Text=" sec" />
+            <TextBlock Style="{StaticResource notice}" Text="(1~60の整数値)" />
+        </StackPanel>
+        <StackPanel Orientation="Horizontal">
+            <StackPanel Width="150"
+                        Margin="10,0,0,0"
+                        Orientation="Horizontal">
+                <TextBlock Width="Auto"
+                           Margin="0"
+                           Style="{StaticResource label}"
+                           Text="背景色" />
+                <TextBlock Style="{StaticResource notice}" Text="(0~255の整数値)" />
+            </StackPanel>
+            <TextBlock Text="R: " />
+            <TextBox Margin="0,0,5,0" Text="{Binding Config.DetailBackground.R, UpdateSourceTrigger=Explicit, ValidatesOnExceptions=True}" />
+            <TextBlock Text="G: " />
+            <TextBox Margin="0,0,5,0" Text="{Binding Config.DetailBackground.G, UpdateSourceTrigger=Explicit, ValidatesOnExceptions=True}" />
+            <TextBlock Text="B: " />
+            <TextBox Margin="0,0,5,0" Text="{Binding Config.DetailBackground.B, UpdateSourceTrigger=Explicit, ValidatesOnExceptions=True}" />
+            <TextBlock Text="A: " />
+            <TextBox Text="{Binding Config.DetailBackground.A, UpdateSourceTrigger=Explicit, ValidatesOnExceptions=True}" />
+        </StackPanel>
+        <TextBlock Style="{StaticResource h1}" Text="投稿ウィンドウの設定" />
+        <StackPanel Orientation="Horizontal">
+            <TextBlock Style="{StaticResource label}" Text="文字サイズ" />
+            <TextBox Text="{Binding Config.UpdateFontSize.Value, UpdateSourceTrigger=Explicit, ValidatesOnExceptions=True}" />
+            <TextBlock Text=" px" />
+            <TextBlock Style="{StaticResource notice}" Text="(1~50の整数値)" />
+        </StackPanel>
+        <TextBlock Style="{StaticResource h1}" Text="ログウィンドウの設定" />
+        <StackPanel Orientation="Horizontal">
+            <TextBlock Style="{StaticResource label}" Text="文字サイズ" />
+            <TextBox Text="{Binding Config.LogFontSize.Value, UpdateSourceTrigger=Explicit, ValidatesOnExceptions=True}" />
+            <TextBlock Text=" px" />
+            <TextBlock Style="{StaticResource notice}" Text="(1~50の整数値)" />
+        </StackPanel>
+        <StackPanel Orientation="Horizontal">
+            <TextBlock Style="{StaticResource label}" Text="最大記録数" />
+            <TextBox Text="{Binding Config.MaxLogCount.Value, UpdateSourceTrigger=Explicit, ValidatesOnExceptions=True}" />
+            <TextBlock Text=" 件" />
+            <TextBlock Style="{StaticResource notice}" Text="(0~2000の整数値)" />
+        </StackPanel>
+        <StackPanel Margin="0,10"
+                    HorizontalAlignment="Right"
+                    Orientation="Horizontal">
+            <Button Click="Default_Click" Content="デフォルトに戻す" />
+            <Button Click="Cancel_Click" Content="キャンセル" />
+            <Button Click="Apply_Click" Content="適用" />
+        </StackPanel>
+    </StackPanel>
+</Window>
